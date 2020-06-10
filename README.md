@@ -100,7 +100,7 @@ I verified that my perspective transform was working as expected by drawing the 
 <img src="output_images/perspective_transform.png" width="960" alt="Perspective Transformed Binary Image" />
 
 
-#### I haven't got good results here so I am temporarily leaving this as template. Will come back and fix later.
+# I haven't got good results from here so I am temporarily leaving this as template. Will come back and fix later.
 
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
