@@ -1,3 +1,5 @@
+# Please see this as a placeholder for submission requirement only. I need to finish my code first before I edit this README file.
+# PLEASE FOCUS ON MY CODE FIRST!!!!
 ## README
 
 ---
@@ -100,17 +102,20 @@ I verified that my perspective transform was working as expected by drawing the 
 <img src="output_images/perspective_transform.png" width="960" alt="Perspective Transformed Binary Image" />
 
 
-# I haven't got good results from here so I am temporarily leaving this as template. Will come back and fix later.
-
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
 Then I did some other stuff and fit my lane lines with a 2nd order polynomial kinda like this:
 
-![alt text][image5]
+[//]: # (Image References)
+<img src="output_images/lane_pixels.png" width="960" alt="Lane Pixels" />
+<img src="output_images/search_around_lane_pixels.png" width="960" alt="Search Around Lane Pixels" />
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
 I did this in lines # through # in my code in `my_other_file.py`
+
+[//]: # (Image References)
+<img src="output_images/lane_detection.png" width="960" alt="Lane Detection" />
 
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
@@ -132,4 +137,6 @@ Here's a [link to my video result](./project_video.mp4)
 
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+Some parameters need to be tweaked in order to perform better image processing. Working on it!
+
+Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.
