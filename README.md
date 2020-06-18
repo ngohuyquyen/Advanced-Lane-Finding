@@ -116,14 +116,12 @@ Then, I use those values to fit polynomials in left and right lane lines in real
 Next, I can find the offset of the car from the center of the lane (assumed the camera is mounted at the center of the car, which will be the center of the image) by taking the midpoint index of the left and right lane line indices. Finally, I take the difference between the center index of the image and that midpoint index, and convert the result to real world value. If the result is negative, which means the car is on the left of the lane center, and vice versa.
 I also created the 'unwarp()' function to unwarp the warped image, and 'projection()' function to fill the detection lane with green color.
 
-<img src="output_images/result_image.png" width="960" alt="Result Image" />
-
 
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
-I implemented this step in lines # through # in my code in `yet_another_file.py` in the function `map_lane()`.  Here is an example of my result on a test image:
+In the final step, I combined all the functions I have created into 'process_image()' function to process the videos. The function includes undistortion, threshold, perspective transform, fill color green to lane, unwarp image and put the info on the resulting image (left curvature, right curvature, center offset).
 
-![alt text][image6]
+<img src="output_images/result_image.png" width="960" alt="Result Image" />
 
 ---
 
