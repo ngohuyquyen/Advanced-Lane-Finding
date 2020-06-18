@@ -102,15 +102,22 @@ Next, we fit those predicted lane line indices in 2 second order polynomials, on
 Finally, one optional step, is to search around the previously found lines with function 'search_around"poly()' so that we don't have to start searching from scratch everytime.
 
 [//]: # (Image References)
-<img src="output_images/fit_poly.png" width="500" alt="Lane Pixels" />
+<img src="output_images/fit_poly.JPG" width="960" alt="Lane Pixels" />
 <img src="output_images/search_around_lane_pixels.png" width="960" alt="Search Around Lane Pixels" />
 
-#### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
+#### 5. Describe how I calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
-I did this in lines # through # in my code in `my_other_file.py`
+To calculated the radius of the curvature of the lane, first I get the converter meters per pixel in both x and y directions.
+Then, I use those values to fit polynomials in left and right lane lines in real world. I can then calculate the radius of left and right curvative via this formula:
 
 [//]: # (Image References)
-<img src="output_images/lane_detection.png" width="960" alt="Lane Detection" />
+<img src="output_images/curve_formula.JPG" width="960" alt="Curvature Formula" />
+
+Next, I can find the offset of the car from the center of the lane (assumed the camera is mounted at the center of the car, which will be the center of the image) by taking the midpoint index of the left and right lane line indices. Finally, I take the difference between the center index of the image and that midpoint index, and convert the result to real world value. If the result is negative, which means the car is on the left of the lane center, and vice versa.
+I also created the 'unwarp()' function to unwarp the warped image, and 'projection()' function to fill the detection lane with green color.
+
+<img src="output_images/result_image.png" width="960" alt="Result Image" />
+
 
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
