@@ -49,7 +49,7 @@ Applying the distortion correction function above, I can get a sample undistorte
 
 #### 2. Describe how I used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
 
-I used a combination of color and gradient thresholds to generate a binary image.
+Via 'threshold' function, I used a combination of color and gradient thresholds to generate a binary image.
 First, I use Sobel operator threshold of both x and y directions with sobel kernal 5, and take the gradient of them with threshold from 230 to 255
 Second, I use HLS color channel, including S-channel for finding yellow lines with threshold from 230 to 255.
 Third, I use LAB color channel, including B-channel for further supporting finding yellow lines with threshold from 150 to 200.
@@ -59,46 +59,50 @@ After combining all those color and gradient threholds together, I get a binary 
 [//]: # (Image References)
 <img src="output_images/threshold_binary_image2.png" width="960" alt="Thresholded Binary Image" />
 
-#### 3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
+#### 3. Describe how I performed a perspective transform and provide an example of a transformed image.
 
-The code for my perspective transform includes a function called `perspective_transform()`, which appears in lines 1 through 8 in the file `example.py` (output_images/examples/example.py) (or, for example, in the 3rd code cell of the IPython notebook).  The `perspective_transform()` function takes as inputs an image (`img`), as well as source (`src`) and destination (`dst`) points.  I chose the hardcode the source and destination points in the following manner:
+This piece of code will be under the function 'perspective_transform()'. The function takes in a binary image obtained from the 'threshold()' function in the previous step. The function also takes four points in the input image as source 'src' and four points in the output image 'dst'. After that, the transformation matrix M is obtained with function 'cv2.getPerspectiveTransform()' and use it to get the output warped image with function 'cv2.warpPerspective()'.
 
 ```python
     src = np.float32(
-        [[150,720],
-         [1100,720],
-         [800,500],
-         [500,500]])
+        [[0,680],
+         [1280,680],
+         [800,480],
+         [550,480]])
     
     # Four desired coordinates
     dst = np.float32(
-        [[200,720],
-         [1000,720],
-         [1000,0],
-         [200,0]]) 
+        [[0,720],
+         [1280,720],
+         [1280,0],
+         [0,0]]) 
 ```
 
 This resulted in the following source and destination points:
 
 | Source        | Destination   | 
 |:-------------:|:-------------:| 
-| 150, 720      | 200, 720      | 
-| 1100, 720     | 1000, 720     |
-| 800, 500      | 1000, 0       |
-| 500, 500      | 200, 0        |
+| 0, 680        | 0, 720        | 
+| 1280, 680     | 1280, 720     |
+| 800, 480      | 1280, 0       |
+| 550, 480      | 0, 0          |
 
 I verified that my perspective transform was working as expected by drawing the `src` and `dst` points onto a test image and its warped counterpart to verify that the lines appear parallel in the warped image.
 
 [//]: # (Image References)
-<img src="output_images/perspective_transform.png" width="960" alt="Perspective Transformed Binary Image" />
+<img src="output_images/perspective_transform2.png" width="960" alt="Perspective Transformed Binary Image" />
 
 
-#### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
+#### 4. Describe how I identified lane-line pixels and fit their positions with a polynomial?
 
-Then I did some other stuff and fit my lane lines with a 2nd order polynomial kinda like this:
+Coming the find the lane pixels, I did a couple  of steps.
+First, I make a histogram of visible pixels in a warped image obtained from the previous 'perspective_transform()' function, with the two peaks being the two starting position of left and right lanes.
+Then, I use the trick of sliding windows (10 windows each image with width of 200 pixels) to capture the non-zero pixels within each window, and append their indices to the lists. If the number of pixels in a window surpasses a threhold number (set to be 50 pixels), we consider that to be good prediction of lane lines.
+Next, we fit those predicted lane line indices in 2 second order polynomials, one for right line and one for left line, and drawing them on the image.
+Finally, one optional step, is to search around the previously found lines with function 'search_around"poly()' so that we don't have to start searching from scratch everytime.
 
 [//]: # (Image References)
-<img src="output_images/lane_pixels.png" width="960" alt="Lane Pixels" />
+<img src="output_images/fit_poly.png" width="500" alt="Lane Pixels" />
 <img src="output_images/search_around_lane_pixels.png" width="960" alt="Search Around Lane Pixels" />
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
