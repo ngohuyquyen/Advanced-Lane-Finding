@@ -124,7 +124,7 @@ In the final step, I combined all the functions I have created into 'process_ima
 
 ### Pipeline (video)
 
-#### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
+#### 1. Link to my output video
 
 Here's a [link to my video result](https://youtu.be/N_ia0r_Iyjs)
 
@@ -132,8 +132,6 @@ Here's a [link to my video result](https://youtu.be/N_ia0r_Iyjs)
 
 ### Discussion
 
-#### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
+The pipeline fails at more challenging videos where there are shadows involved, sudden change in lighting/road color or the lane lines blend in with the road.
+Some parameters need to be tweaked in order to perform better image processing. I might need to fine tune more the thresholds and perspective transform elements to make the algorithm correctly detects the lane lines even in harsh conditions listed above.
 
-Some parameters need to be tweaked in order to perform better image processing. Working on it!
-
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.
